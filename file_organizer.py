@@ -1,24 +1,32 @@
+# Library importing
 import os
 import shutil
 
-current_dir = "E:/Programming/Python/Playground/"
+class FileOrganization():
+	# Initialize
+	def __init__(self, current_dir, destination_dir = '', ext):
+		# Current directory that want to be organized
+		self.current_dir = current_dir
+		# Extension that want to be organized
+		self.ext = ext
+		# Destination directory to store the organized extension(s)
+		if destination_dir != '' :
+			self.destination_dir = destination_dir
 
-destination_folder = 'Testing/'
+	def organize(self):
 
-for f in os.listdir(current_dir):
-	filename, file_ext = os.path.splitext(f)
+		# Search for all file in the current directory
+		for file in os.listdir(self.current_dir):
+			# Get file name and file extension from each file in the current directory
+			filename, file_ext = os.path.splitext(file)
 
-	if not os.path.exists((current_dir + destination_folder)):
-		print("Oke")
-		os.makedirs((current_dir + destination_folder))
+			# Check if destination directory is exists
+			if not os.path.exists(self.destination_dir):
+				os.makedirs(self.destination_dir)
 
-	if not file_ext:
-		pass
-	elif filename in ('test') and file_ext in ('.py'):
-		print("Done")
-		
-		shutil.move(
-			os.path.join(current_dir, (filename + file_ext)),
-			os.path.join(current_dir, destination_folder,  (filename + file_ext))
-		)
-			
+			# Move the file using shutil from current directory to destination directory
+			if file_ext in (self.ext):
+				shutil.move(
+					os.path.join(self.current_dir, (filename + file_ext)),
+					os.path.join(self.destination_dir,  (filename + file_ext))
+				)					
