@@ -14,7 +14,10 @@ class FileOrganization():
 				os.makedirs(destination_dir)
 
 			# Move the file using shutil from current directory to destination directory
-			if file_ext in (ext):
+			if not file_ext:
+				pass
+
+			elif file_ext in (ext):
 				shutil.move(
 					os.path.join(current_dir, (filename + file_ext)),
 					os.path.join(destination_dir,  (filename + file_ext))
